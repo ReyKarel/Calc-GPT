@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setResponse } from "../store/slices/gptSlice";
 
 
-const API_KEY = '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';
+const API_KEY = process.env.REACT_APP_OPENAI_API_KEY
 export async function processChatGPTRequest(prompt, result) {
     const systemMessage = {
         role: 'system',
