@@ -1,13 +1,171 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+    margin: 0;
+    background: repeating-linear-gradient(to right, #31aae7, #ee58f3);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.calculator-grid {
+    position: absolute;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(4, 6rem);
+    grid-template-rows: minmax(7rem, auto) repeat(6, 6rem);
+}
+
+.calculator-grid>button {
+    cursor: pointer;
+    font-size: 2rem;
+    border: 1px solid white;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+.calculator-grid>button:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.span-two {
+    grid-column: span 2;
+}
+
+.output {
+    grid-column: 1 / -1;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: rgba(00, 00, 00, 0.75);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0.75rem 0.75rem 0.75rem 2.75rem;
+    word-wrap: break-word;
+    word-break: break-all;
+    position: relative;
+}
+
+.output .previous-operand {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1.5rem;
+    word-spacing: 10px;
+}
+
+.output .current-operand {
+    color: white;
+    font-size: 2.5rem;
+}
+
+.chat-window-open {
+    position: absolute;
+    background-color: rgba(00, 00, 00, 0.75);
+    color: white;
+    width: 100%;
+    word-wrap: break-word;
+    font-size: 1.5rem;
+    font-weight: 300;
+    font-family: Arial, Helvetica, sans-serif;
+    right: 102%;
+    padding: 20px;
+    border-radius: 10px;
+    top: 0px;
+    transform: translate3d(0, 0, 0);
+    transition: 0.2s all ease-in-out;
+}
+
+.box {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+#bottom-left-corner {
+    border-bottom-left-radius: 10px;
+}
+
+#bottom-right-corner {
+    border-bottom-right-radius: 10px;
+}
+
+.gpt-symbol {
+    color: rgb(255, 255, 255, 0.7);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    margin: 5px;
+    outline: none;
+}
+
+.gpt-symbol:hover,
+.info-symbol:hover,
+.prompt-symbol:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.info-symbol {
+    color: rgb(255, 255, 255, 0.7);
+    outline: none;
+    position: relative;
+}
+
+.prompt-symbol {
+    color: rgb(255, 255, 255, 0.7);
+    outline: none;
+    position: relative;
+}
+
+.option-card {
+    display: flex;
+    border-radius: 10px;
+    background-color: rgba(00, 00, 00, 0.75);
+    position: absolute;
+    width: auto;
+    min-height: 72px;
+    max-height: 553px;
+    max-width: 320px;
+    flex-direction: column;
+    left: 102%;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 300;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 20px;
+    gap: 3rem;
+    word-wrap: break-word;
+}
+
+.option-card-open {
+    width: 320px;
+}
+
+.option-card-content {
+    position: relative;
+    display: flex;
+}
+
+.option-buttons {
+    display: flex;
+    gap: 1rem;
+    top: 40px;
+}
+
+.prompt-buttons {
+    display: flex;
+    font-size: auto;
+    gap: 2rem;
+    word-wrap: break-word;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.prompt-buttons>* {
+    color: rgb(255, 255, 255, 0.7);
+    outline: none;
+    position: relative;
+}
+
+.prompt-buttons>*:hover {
+    color: white;
+    cursor: pointer;
 }
