@@ -9,7 +9,9 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import 'react-tooltip/dist/react-tooltip.css'
-require('dotenv').config()
+
+// This line sets the path to the root of your project
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
