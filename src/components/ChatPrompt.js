@@ -8,7 +8,6 @@ import ParagraphSkeleton from "./ParagraphSkeleton";
 import 'react-loading-skeleton/dist/skeleton.css';
 
 
-export const API_KEY = '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';
 
 
 const ChatPrompt = ({ prompt, className }) => {

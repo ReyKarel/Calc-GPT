@@ -34,6 +34,3 @@ const OptionCard = () => {
 export default OptionCard;
 
 
-// info button is easier: make clicking it show and hide info
-// prompt button reveals and hides prompt options
-// add tooltips to them buttons
