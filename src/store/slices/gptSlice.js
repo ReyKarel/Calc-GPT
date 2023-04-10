@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { clearAll } from "./buttonsSlice";
 import { processChatGPTRequest } from "../../components/api";
 
-// const defaultPrompt = "When I provide you with a number, please provide me with a few interesting facts about it, as a short paragraph rather than a list of points. If there aren't any fascinating facts about the number, feel free to provide a shorter response rather than include irrelevant information. limit the response length to 50 words";
 
 export const prompts = {
     defaultPrompt: "When I provide you with a number, please provide me with a few interesting facts about it, as a short paragraph rather than a list of points. If there aren't any fascinating facts about the number, feel free to provide a shorter response rather than include irrelevant information. limit the response length to 50 words.",

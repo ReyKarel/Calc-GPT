@@ -15,28 +15,28 @@ const PromptOptions = ({ onChoosePrompt }) => {
     };
     return (
         <div className='prompt-buttons'>
-            <div>
-                <HiOutlineLightBulb onClick={() => handlePromptClick(prompts.defaultPrompt)} />
+            <div onClick={() => handlePromptClick(prompts.defaultPrompt)}>
+                <HiOutlineLightBulb  />
                 <span>Interesting facts (default)</span>
             </div>
-            <div>
-                <GiPirateHat onClick={() => handlePromptClick(prompts.piratePrompt)} />
+            <div onClick={() => handlePromptClick(prompts.piratePrompt)}>
+                <GiPirateHat  />
                 <span>Answer like a pirate</span>
             </div>
-            <div>
-                <GiEmptyHourglass onClick={() => handlePromptClick(prompts.historyFactPrompt)} />
+            <div onClick={() => handlePromptClick(prompts.historyFactPrompt)}>
+                <GiEmptyHourglass  />
                 <span>History facts</span>
             </div>
-            <div>
-                <MdOutlineTempleBuddhist onClick={() => handlePromptClick(prompts.zenPoemPrompt)} />
+            <div onClick={() => handlePromptClick(prompts.zenPoemPrompt)}>
+                <MdOutlineTempleBuddhist  />
                 <span>Zen poem</span>
             </div>
-            <div>
-                <BsChatSquareQuote onClick={() => handlePromptClick(prompts.inspirationalQuotePrompt)} />
+            <div onClick={() => handlePromptClick(prompts.inspirationalQuotePrompt)}>
+                <BsChatSquareQuote  />
                 <span>Inspirational quote</span>
             </div>
-            <div>
-                <GiSpaceship onClick={() => handlePromptClick(prompts.scienceFictionPrompt)} />
+            <div onClick={() => handlePromptClick(prompts.scienceFictionPrompt)}>
+                <GiSpaceship  />
                 <span>Science fiction</span>
             </div>
         </div>
