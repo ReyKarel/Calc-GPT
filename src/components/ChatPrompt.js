@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import * as React from 'react';
 import { useEffect } from "react";
 import { setResponse, clearError, setLoading } from "../store/slices/gptSlice";
-import  { SkeletonTheme } from "react-loading-skeleton";
+import { SiOpenai } from "react-icons/si";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import ParagraphSkeleton from "./ParagraphSkeleton";
 import 'react-loading-skeleton/dist/skeleton.css';
 
