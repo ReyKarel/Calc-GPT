@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import * as React from 'react';
 import { useEffect } from "react";
 import { setResponse, clearError, setLoading } from "../store/slices/gptSlice";
-import { SiOpenai } from "react-icons/si";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import ParagraphSkeleton from "./ParagraphSkeleton";
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -10,7 +9,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 
 
-const ChatPrompt = ({ prompt, className }) => {
+const ChatPrompt = () => {
     const result = useSelector((state) => {
         return state.buttons.result;
     });

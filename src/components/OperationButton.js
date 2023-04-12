@@ -2,10 +2,10 @@ import { useDispatch } from "react-redux";
 import { changeOperation } from "../store/slices/buttonsSlice";
 
 
-const OperationButton = ({ operation }) => {
+const OperationButton = ({ operation, children }) => {
     const dispatch = useDispatch();
     return (
-        <button onClick={() => dispatch(changeOperation(operation))}>{operation}</button>
+        <button onClick={() => dispatch(changeOperation(operation))}>{children}</button>
     );
 
 };

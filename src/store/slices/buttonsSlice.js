@@ -5,7 +5,7 @@ const initialState = {
     firstOperand: null,
     operation: null,
     secondOperand: null,
-    currentNumber: '0',
+    currentNumber: null,
     result: null
 };
 
@@ -20,14 +20,7 @@ const buttonsSlice = createSlice({
                 state.currentNumber = state.currentNumber + '.';
             }
         },
-        changeFirstOperand(state, action) {
-            state.firstOperand = parseFloat(action.payload);
-            console.log(typeof state.firstOperand);
-        },
-        changeSecondOperand(state, action) {
-            if (action.payload !== '0') { state.secondOperand = parseFloat(action.payload); }
 
-        },
         changeOperation(state, action) {
             if (state.result !== null) {
 
@@ -35,13 +28,21 @@ const buttonsSlice = createSlice({
                 state.result = null;
                 state.operation = action.payload;
                 state.secondOperand = null;
-                state.currentNumber = '0';
+                state.currentNumber = null;
             }
 
             if (!state.operation) {
+                if (state.firstOperand === null) {
+                    state.operation = action.payload;
+                    state.firstOperand = '0';
+                    state.currentNumber = null;
+                } else {
+                    state.operation = action.payload;
+                    state.firstOperand = parseFloat(state.currentNumber);
+                    state.currentNumber = null;
+                }
+            } else {
                 state.operation = action.payload;
-                state.firstOperand = parseFloat(state.currentNumber);
-                state.currentNumber = '0';
             }
 
 
@@ -50,17 +51,15 @@ const buttonsSlice = createSlice({
         addDigit(state, action) {
 
             if (state.result !== null) {
-                state.currentNumber = '0';
+                state.currentNumber = action.payload;
                 state.firstOperand = null;
                 state.secondOperand = null;
                 state.operation = null;
                 state.result = null;
-            }
-            if (state.currentNumber === '0') {
-                state.currentNumber = action.payload;
-
-            } else {
+            } else if (state.currentNumber !== null) {
                 state.currentNumber += action.payload;
+            } else {
+                state.currentNumber = action.payload;
             }
         },
         deleteDigit(state) {
@@ -68,7 +67,7 @@ const buttonsSlice = createSlice({
                 state.currentNumber = state.currentNumber.slice(0, -1);
 
             } else {
-                state.currentNumber = '0';
+                state.currentNumber = null;
             }
         },
         clearAll(state) {
@@ -81,36 +80,15 @@ const buttonsSlice = createSlice({
                 state.currentNumber = state.secondOperand;
             }
             if (state.firstOperand !== null) {
-                state.secondOperand = parseFloat(state.currentNumber);
-                switch (state.operation) {
-                    case 'x':
-                        state.result = state.firstOperand * state.secondOperand;
-                        break;
-                    case '÷':
-                        state.result = state.firstOperand / state.secondOperand;
-                        break;
-                    case '+':
-                        state.result = state.firstOperand + state.secondOperand;
-                        break;
-                    case '-':
-                        state.result = state.firstOperand - state.secondOperand;
-                        break;
-                    default:
-                        break;
-                }
+                // state.secondOperand = parseFloat(state.currentNumber);
+                if (state.secondOperand === null) state.secondOperand = state.firstOperand;
+                state.result = eval(`${state.firstOperand} ${state.operation} ${state.secondOperand}`);
+
             }
         }
     }
 });
 
-// currentnumber tracks the current number
-// pressing an operation locks current number as first operand
-// this also resets currentNumber to 0
-// operation can be changed, first operand remains the same though
-// new digits become the second operand
-// operation or = locks first and second operand and returns
-// the result
-//
 
 
 

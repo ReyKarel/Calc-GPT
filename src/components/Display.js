@@ -1,10 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { SiOpenai } from 'react-icons/si';
 import { setAbort, setError, setLoading, setResponse } from "../store/slices/gptSlice";
-import { API_KEY } from "./ChatPrompt";
 import { processChatGPTRequest } from "./api";
 import { Tooltip } from "react-tooltip";
-import { useEffect } from "react";
 
 
 
@@ -30,11 +28,11 @@ const Display = () => {
         }
     }
 
-    const { result, currDig, secondOperand, firstOperand, operation, prompt, abort } = useSelector((state) => {
+    const { result, currentNumber, secondOperand, firstOperand, operation, prompt, abort } = useSelector((state) => {
         return {
             firstOperand: prettifyNum(state.buttons.firstOperand),
             operation: state.buttons.operation,
-            currDig: prettifyNum(state.buttons.currentNumber),
+            currentNumber: prettifyNum(state.buttons.currentNumber),
             result: prettifyNum(state.buttons.result),
             secondOperand: prettifyNum(state.buttons.secondOperand),
             prompt: state.gpt.prompt,
@@ -76,7 +74,7 @@ const Display = () => {
                     {firstOperand}
                     {operation}
                 </div>}
-            <div className="current-operand">{result !== null ? result : currDig}</div>
+            <div className="current-operand">{result !== null ? result : currentNumber === null ? '0' : currentNumber}</div>
 
         </div>
     );

@@ -5,9 +5,9 @@ body {
 }
 
 .calculator-grid {
-    position: absolute;
-    display: grid;
+    position: relative;
     justify-content: center;
+    display: grid;
     grid-template-columns: repeat(4, 6rem);
     grid-template-rows: minmax(7rem, auto) repeat(6, 6rem);
 }
@@ -55,15 +55,13 @@ body {
 }
 
 .chat-window-open {
-    position: absolute;
     background-color: rgba(00, 00, 00, 0.75);
     color: white;
-    width: 100%;
+    width: 350px;
     word-wrap: break-word;
     font-size: 1.5rem;
     font-weight: 300;
     font-family: Arial, Helvetica, sans-serif;
-    right: 102%;
     padding: 20px;
     border-radius: 10px;
     top: 0px;
@@ -73,10 +71,10 @@ body {
 
 .box {
     position: relative;
-    display: flex;
     flex-direction: row;
-    justify-content: center;
     margin-top: 3rem;
+    justify-content: center;
+    gap: 2rem;
 }
 
 #bottom-left-corner {
@@ -125,7 +123,6 @@ body {
     max-height: 553px;
     max-width: 320px;
     flex-direction: column;
-    left: 102%;
     color: white;
     font-size: 1.5rem;
     font-weight: 300;
