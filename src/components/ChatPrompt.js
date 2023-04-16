@@ -38,7 +38,7 @@ const ChatPrompt = () => {
     return (
         <div >
             <SkeletonTheme borderRadius={"0.75rem"} height={16} baseColor="#8f8f8f" highlightColor="#f7f7f7">
-                <div className={response || loading ? "chat-window-open" : ''}>
+                <div className={response || loading ? "chat-window-open" : 'chat-window-hidden'}>
                     {loading ? <ParagraphSkeleton /> : response}
                 </div>
             </SkeletonTheme>

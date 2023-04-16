@@ -12,7 +12,9 @@ const Display = () => {
     });
     function prettifyNum(num) {
         if (num) {
-            if (typeof num === 'number') {
+            if (num === '/') return '÷'
+            else if (num === '*') return '×'
+            else if (typeof num === 'number') {
                 const [integer, decimal] = num.toString().split('.');
                 if (decimal === undefined) return INTEGER_FORMATTER.format(integer);
                 return `${INTEGER_FORMATTER.format(integer)}.${decimal}`;
@@ -31,7 +33,7 @@ const Display = () => {
     const { result, currentNumber, secondOperand, firstOperand, operation, prompt, abort } = useSelector((state) => {
         return {
             firstOperand: prettifyNum(state.buttons.firstOperand),
-            operation: state.buttons.operation,
+            operation: prettifyNum(state.buttons.operation),
             currentNumber: prettifyNum(state.buttons.currentNumber),
             result: prettifyNum(state.buttons.result),
             secondOperand: prettifyNum(state.buttons.secondOperand),

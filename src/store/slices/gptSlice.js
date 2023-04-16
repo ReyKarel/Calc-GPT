@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { clearAll } from "./buttonsSlice";
 import { processChatGPTRequest } from "../../components/api";
 
-// const defaultPrompt = "When I provide you with a number, please provide me with a few interesting facts about it, as a short paragraph rather than a list of points. If there aren't any fascinating facts about the number, feel free to provide a shorter response rather than include irrelevant information. limit the response length to 50 words";
 
 export const prompts = {
     defaultPrompt: "When I provide you with a number, please provide me with a few interesting facts about it, as a short paragraph rather than a list of points. If there aren't any fascinating facts about the number, feel free to provide a shorter response rather than include irrelevant information. limit the response length to 50 words.",
@@ -12,6 +11,7 @@ export const prompts = {
     zenPoemPrompt: "when i give you a number i want you to write a short zen-style poem that includes it",
     inspirationalQuotePrompt: "when i give you a number i want you to respond with a ridiculous inspiring quote you made up that includes the number. limit the response to 40 words and don't preface it with anything other than the quote itself, and also don't include credit for the writer of the quote at the end"
 };
+
 const initialState = {
     prompt: prompts.defaultPrompt,
     response: '',

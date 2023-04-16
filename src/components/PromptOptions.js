@@ -11,13 +11,17 @@ const PromptOptions = ({ onChoosePrompt }) => {
 
     const handlePromptClick = (prompt) => {
         dispatch(setPrompt(prompt));
-        onChoosePrompt()
+        onChoosePrompt();
     };
+
+
+    
+
     return (
         <div className='prompt-buttons'>
             <div>
                 <HiOutlineLightBulb onClick={() => handlePromptClick(prompts.defaultPrompt)} />
-                <span>Interesting facts (default)</span>
+                <span>General facts (default)</span>
             </div>
             <div>
                 <GiPirateHat onClick={() => handlePromptClick(prompts.piratePrompt)} />

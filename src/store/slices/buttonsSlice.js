@@ -14,7 +14,9 @@ const buttonsSlice = createSlice({
     initialState: initialState,
     reducers: {
         addDecimal(state) {
-            if (state.currentNumber.includes('.')) {
+            if (state.currentNumber === null) {
+                state.currentNumber = '0.';
+            } else if (state.currentNumber.includes('.')) {
                 return state;
             } else {
                 state.currentNumber = state.currentNumber + '.';
@@ -34,7 +36,7 @@ const buttonsSlice = createSlice({
             if (!state.operation) {
                 if (state.firstOperand === null) {
                     state.operation = action.payload;
-                    state.firstOperand = '0';
+                    state.firstOperand = state.currentNumber || '0';
                     state.currentNumber = null;
                 } else {
                     state.operation = action.payload;
@@ -43,11 +45,14 @@ const buttonsSlice = createSlice({
                 }
             } else {
                 state.operation = action.payload;
+                // state.result = eval(`${state.firstOperand} ${state.operation} ${state.secondOperand}`);
+                // add logic to calculate on setOperation when there is already an operation
             }
 
 
 
         },
+
         addDigit(state, action) {
 
             if (state.result !== null) {
@@ -57,7 +62,7 @@ const buttonsSlice = createSlice({
                 state.operation = null;
                 state.result = null;
             } else if (state.currentNumber !== null) {
-                state.currentNumber += action.payload;
+                if (state.currentNumber.length < 16) state.currentNumber += action.payload;
             } else {
                 state.currentNumber = action.payload;
             }
@@ -80,8 +85,7 @@ const buttonsSlice = createSlice({
                 state.currentNumber = state.secondOperand;
             }
             if (state.firstOperand !== null) {
-                // state.secondOperand = parseFloat(state.currentNumber);
-                if (state.secondOperand === null) state.secondOperand = state.firstOperand;
+                state.secondOperand = parseFloat(state.currentNumber) || "0";
                 state.result = eval(`${state.firstOperand} ${state.operation} ${state.secondOperand}`);
 
             }
