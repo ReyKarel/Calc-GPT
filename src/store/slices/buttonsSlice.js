@@ -45,8 +45,7 @@ const buttonsSlice = createSlice({
                 }
             } else {
                 state.operation = action.payload;
-                // state.result = eval(`${state.firstOperand} ${state.operation} ${state.secondOperand}`);
-                // add logic to calculate on setOperation when there is already an operation
+
             }
 
 
@@ -79,6 +78,7 @@ const buttonsSlice = createSlice({
             return initialState;
         },
         getResult(state) {
+
             if (state.result !== null) {
                 state.firstOperand = state.result;
                 state.result = null;
@@ -87,6 +87,10 @@ const buttonsSlice = createSlice({
             if (state.firstOperand !== null) {
                 state.secondOperand = parseFloat(state.currentNumber) || "0";
                 state.result = eval(`${state.firstOperand} ${state.operation} ${state.secondOperand}`);
+
+            } else {
+                state.secondOperand = state.currentNumber || '0';
+                state.result = state.currentNumber || '0';
 
             }
         }

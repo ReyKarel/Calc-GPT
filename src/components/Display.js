@@ -20,6 +20,7 @@ const Display = () => {
                 return `${INTEGER_FORMATTER.format(integer)}.${decimal}`;
 
             } else if (typeof num === 'string') {
+                if (num === '+' || num === '-') return num
                 const [integer, decimal] = num.split('.');
                 if (!decimal && num.length === integer.length) return INTEGER_FORMATTER.format(integer);
                 if (num.charAt(num.length - 1) === '.') return `${INTEGER_FORMATTER.format(integer)}.`;
@@ -29,7 +30,6 @@ const Display = () => {
             return num;
         }
     }
-
     const { result, currentNumber, secondOperand, firstOperand, operation, prompt, abort } = useSelector((state) => {
         return {
             firstOperand: prettifyNum(state.buttons.firstOperand),
@@ -41,6 +41,7 @@ const Display = () => {
             abort: state.gpt.abort
         };
     });
+    console.log(prompt)
     const dispatch = useDispatch();
 
 
