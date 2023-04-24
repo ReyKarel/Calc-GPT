@@ -23,7 +23,7 @@ const buttonsSlice = createSlice({
             }
         },
 
-        changeOperation(state, action) {
+        setOperation(state, action) {
             if (state.result !== null) {
 
                 state.firstOperand = state.result;
@@ -74,7 +74,7 @@ const buttonsSlice = createSlice({
                 state.currentNumber = null;
             }
         },
-        clearAll(state) {
+        clearAll() {
             return initialState;
         },
         getResult(state) {
@@ -86,7 +86,8 @@ const buttonsSlice = createSlice({
             }
             if (state.firstOperand !== null) {
                 state.secondOperand = parseFloat(state.currentNumber) || "0";
-                state.result = eval(`${state.firstOperand} ${state.operation} ${state.secondOperand}`);
+                state.result = Number((eval(`${state.firstOperand} ${state.operation} ${state.secondOperand}`)).toFixed(16));
+                // This is to avoid extreme float number percision issues
 
             } else {
                 state.secondOperand = state.currentNumber || '0';
@@ -100,6 +101,6 @@ const buttonsSlice = createSlice({
 
 
 
-export const { addDecimal, getResult, clearAll, deleteDigit, changeFirstOperand, addDigit, changeOperation, changeSecondOperand } = buttonsSlice.actions;
+export const { addDecimal, getResult, clearAll, deleteDigit, addDigit, setOperation } = buttonsSlice.actions;
 export const buttonsReducer = buttonsSlice.reducer;
 

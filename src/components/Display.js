@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { SiOpenai } from 'react-icons/si';
-import { setAbort, setError, setLoading, setResponse } from "../store/slices/gptSlice";
+import { setAbortController, setError, setLoading, setResponse } from "../store/slices/gptSlice";
 import { processChatGPTRequest } from "./api";
 import { Tooltip } from "react-tooltip";
 
@@ -10,53 +10,53 @@ const Display = () => {
     const INTEGER_FORMATTER = new Intl.NumberFormat('en-us', {
         maximumFractionDigits: 0
     });
-    function prettifyNum(num) {
-        if (num) {
-            if (num === '/') return '÷';
-            else if (num === '*') return '×';
-            else if (typeof num === 'number') {
-                const [integer, decimal] = num.toString().split('.');
-                if (decimal === undefined) return INTEGER_FORMATTER.format(integer);
-                return `${INTEGER_FORMATTER.format(integer)}.${decimal}`;
+    function standardizeOperation(op) {
+        switch (op) {
+            case '/':
+                return '÷';
+            case '*':
+                return '×';
+            default:
+                return op;
+        }
+    }
 
-            } else if (typeof num === 'string') {
-                if (num === '+' || num === '-') return num;
-                const [integer, decimal] = num.split('.');
-                if (!decimal && num.length === integer.length) return INTEGER_FORMATTER.format(integer);
-                if (num.charAt(num.length - 1) === '.') return `${INTEGER_FORMATTER.format(integer)}.`;
-                return `${INTEGER_FORMATTER.format(integer)}.${decimal}`;
-            }
+    function prettifyNum(num, cutDecimal=false) {
+        if (num) {
+            num = num.toString()
+            const [integer, decimal] = num.split('.');
+            if (num.length === integer.length) return INTEGER_FORMATTER.format(integer);
+            if (num.charAt(num.length - 1) === '.') return cutDecimal ? INTEGER_FORMATTER.format(integer) : `${INTEGER_FORMATTER.format(integer)}.`;
+            return `${INTEGER_FORMATTER.format(integer)}.${decimal}`;
         } else {
             return num;
         }
     }
-    const { result, currentNumber, secondOperand, firstOperand, operation, prompt, abort } = useSelector((state) => {
+    const { result, currentNumber, secondOperand, firstOperand, operation, prompt } = useSelector((state) => {
         return {
-            firstOperand: prettifyNum(state.buttons.firstOperand),
-            operation: prettifyNum(state.buttons.operation),
+            firstOperand: prettifyNum(state.buttons.firstOperand,true),
+            operation: standardizeOperation(state.buttons.operation),
             currentNumber: prettifyNum(state.buttons.currentNumber),
             result: prettifyNum(state.buttons.result),
-            secondOperand: prettifyNum(state.buttons.secondOperand),
+            secondOperand: prettifyNum(state.buttons.secondOperand,true),
             prompt: state.gpt.prompt,
-            abort: state.gpt.abort
         };
     });
-    console.log(prompt);
     const dispatch = useDispatch();
 
 
 
     const handleGPT = async () => {
+        const controller = new AbortController();
+        dispatch(setAbortController(controller));
         dispatch(setLoading(true));
         try {
-            const response = await processChatGPTRequest(prompt, result);
-
-            dispatch(setResponse([response, abort])); 
+            const response = await processChatGPTRequest(prompt, result, controller);
+            dispatch(setResponse(response));
         } catch (error) {
             dispatch(setError(error.message));
         } finally {
             dispatch(setLoading(false));
-            dispatch(setAbort(false));
         }
     };
     return (

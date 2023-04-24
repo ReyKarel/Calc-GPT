@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import { buttonsReducer, changeFirstOperand, changeOperation, changeSecondOperand } from './slices/buttonsSlice';
+import { buttonsReducer, setOperation } from './slices/buttonsSlice';
 import { gptReducer } from "./slices/gptSlice";
 
 const store = configureStore({
@@ -11,4 +11,4 @@ const store = configureStore({
 
 });
 
-export { store, changeFirstOperand, changeOperation, changeSecondOperand };
+export { store, setOperation };

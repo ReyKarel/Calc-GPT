@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { clearAll } from "./buttonsSlice";
-import { processChatGPTRequest } from "../../components/api";
+
 
 
 export const prompts = {
@@ -17,7 +16,7 @@ const initialState = {
     response: '',
     loading: false,
     error: null,
-    abort: false
+    abortController: null
 };
 
 const gptSlice = createSlice({
@@ -28,12 +27,7 @@ const gptSlice = createSlice({
             state.prompt = action.payload;
         },
         setResponse(state, action) {
-            if (action.payload[1]) {
-                state.response = '';
-                state.abort = false;
-            } else {
-                state.response = action.payload[0];
-            }
+            state.response = action.payload;
         },
         setLoading: (state, action) => {
             state.loading = action.payload;
@@ -44,19 +38,21 @@ const gptSlice = createSlice({
         clearError: (state) => {
             state.error = null;
         },
-        setAbort: (state, action) => {
-            state.abort = action.payload;
+        
+        setAbortController: (state, action) => {
+            state.abortController = action.payload;
+        },
+        abortRequest: (state) => {
+            if (state.loading) {
+                state.abortController.abort();
+            }
         }
     },
-    extraReducers: (builder) => {
-        builder.addCase(clearAll, (state) => {
-            if (state.loading) state.abort = true;
-        });
-    }
+    
 });
 
 
 
-export const { setAbort, setLoading, setError, clearError, clearResponse, setPrompt, setResponse } = gptSlice.actions;
+export const { abortRequest, setAbortController, setLoading, setError, clearError, setPrompt, setResponse } = gptSlice.actions;
 export const gptReducer = gptSlice.reducer;
 

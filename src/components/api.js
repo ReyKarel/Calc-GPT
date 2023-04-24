@@ -1,8 +1,8 @@
 import axios from "axios";
 
+
 const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
-export async function processChatGPTRequest(prompt, result) {
-    const controller = new AbortController();
+export async function processChatGPTRequest(prompt, result, controller) {
     const systemMessage = {
         role: 'system',
         content: prompt,
@@ -19,16 +19,17 @@ export async function processChatGPTRequest(prompt, result) {
         headers: {
             'Authorization': 'Bearer ' + API_KEY,
             'Content-Type': 'application/json',
-        }
+        },
+        signal: controller.signal
     }).then((response) => {
         return response.data.choices[0].message.content;
     }).catch((error) => {
-        if (axios.isCancel(error)) { // Handle the cancellation error
-          console.log('Request canceled', error.message);
+        if (axios.isCancel(error)) {
+            console.log('Request canceled', error.message);
         } else {
-          console.error(error);
+            console.error(error);
         }
-      });
+    });
     return response;
 }
 

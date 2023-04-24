@@ -29,13 +29,13 @@ const DropdownPrompts = () => {
       </Dropdown.Item>
     );
   });
-  console.log(promptButtons);
+
   const remainingPromptOptions = Object.values(promptButtons).filter((option) => option.key !== selectedPrompt);
   const selectedPromptButton = promptButtons.find(({ key }) => key === selectedPrompt);
 
   return (
     <>
-      <Dropdown  >
+      <Dropdown >
         <Dropdown.Toggle variant='dark' id="dropdown-basic-button" className='dropdown-button'>
           {selectedPromptButton}
         </Dropdown.Toggle>
