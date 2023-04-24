@@ -12,15 +12,15 @@ const Display = () => {
     });
     function prettifyNum(num) {
         if (num) {
-            if (num === '/') return '÷'
-            else if (num === '*') return '×'
+            if (num === '/') return '÷';
+            else if (num === '*') return '×';
             else if (typeof num === 'number') {
                 const [integer, decimal] = num.toString().split('.');
                 if (decimal === undefined) return INTEGER_FORMATTER.format(integer);
                 return `${INTEGER_FORMATTER.format(integer)}.${decimal}`;
 
             } else if (typeof num === 'string') {
-                if (num === '+' || num === '-') return num
+                if (num === '+' || num === '-') return num;
                 const [integer, decimal] = num.split('.');
                 if (!decimal && num.length === integer.length) return INTEGER_FORMATTER.format(integer);
                 if (num.charAt(num.length - 1) === '.') return `${INTEGER_FORMATTER.format(integer)}.`;
@@ -41,7 +41,7 @@ const Display = () => {
             abort: state.gpt.abort
         };
     });
-    console.log(prompt)
+    console.log(prompt);
     const dispatch = useDispatch();
 
 
@@ -49,9 +49,9 @@ const Display = () => {
     const handleGPT = async () => {
         dispatch(setLoading(true));
         try {
-            const response = await processChatGPTRequest(prompt, result); // while this is fetching I am setting abort to true elsewhere
+            const response = await processChatGPTRequest(prompt, result);
 
-            dispatch(setResponse([response, abort])); // but when this line is executed abort returns to false
+            dispatch(setResponse([response, abort])); 
         } catch (error) {
             dispatch(setError(error.message));
         } finally {

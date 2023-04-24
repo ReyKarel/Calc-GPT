@@ -7,31 +7,23 @@ import ParagraphSkeleton from "./ParagraphSkeleton";
 import 'react-loading-skeleton/dist/skeleton.css';
 
 
-
-
 const ChatPrompt = () => {
-    const result = useSelector((state) => {
-        return state.buttons.result;
+    const { result, response, loading, abort } = useSelector((state) => {
+        return {
+            result: state.buttons.result,
+            response: state.gpt.response,
+            loading: state.gpt.loading,
+            abort: state.gpt.abort
+        };
     });
-    const response = useSelector((state) => {
-        return state.gpt.response;
-    });
-    const loading = useSelector((state) => {
-        return state.gpt.loading;
-    });
-    const abort = useSelector((state) => {
-        return state.gpt.abort;
-    });
-    
+
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(setResponse(''));
         dispatch(clearError());
         dispatch(setLoading(false));
-    }, [result,abort]);
-
-
+    }, [result, abort]);
 
 
 

@@ -102,3 +102,4 @@ const buttonsSlice = createSlice({
 
 export const { addDecimal, getResult, clearAll, deleteDigit, changeFirstOperand, addDigit, changeOperation, changeSecondOperand } = buttonsSlice.actions;
 export const buttonsReducer = buttonsSlice.reducer;
+

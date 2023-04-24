@@ -2,6 +2,7 @@ import ChatPrompt from "./components/ChatPrompt";
 import Display from "./components/Display";
 import DropdownPrompts from "./components/DropdownPrompts";
 import CalcButton from "./components/CalcButton";
+import Info from "./components/Info";
 
 const App = () => {
     return (
@@ -35,6 +36,7 @@ const App = () => {
             <div className="row-item">
                 <DropdownPrompts  />
             </div>
+            <Info/>
         </div>
     );
 };
