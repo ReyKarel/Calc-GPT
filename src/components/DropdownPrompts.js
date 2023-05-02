@@ -22,7 +22,7 @@ const DropdownPrompts = () => {
     const classNames = key === selectedPrompt ? '' : 'dropdown-option';
     return (
       <Dropdown.Item key={key} className={classNames} onClick={() => handlePromptSelect(key)}>
-        <div className='dropdown-section'>
+        <div className='dropdown-title'>
           {icon}
           {label}
         </div>

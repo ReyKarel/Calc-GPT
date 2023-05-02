@@ -1,284 +1,222 @@
-body {
-    overflow: hidden;
-    margin: 0;
-    background: repeating-linear-gradient(to right, #31aae7, #ee58f3);
-    caret-color: transparent;
-    color: transparent;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-}
-
-.calculator-grid {
-    position: relative;
-    justify-content: center;
-    display: grid;
-    grid-template-columns: repeat(4, 6rem);
-    grid-template-rows: minmax(7rem, auto) repeat(6, 6rem);
-}
-
-.chat-window-hidden {
-    visibility: 0;
-    position: relative;
-    width: 384px;
-    padding: 20px;
-}
-
-.calculator-grid>button {
-    cursor: pointer;
-    font-size: 2rem;
-    border: 1px solid white;
-    outline: none;
-    background-color: rgba(255, 255, 255, 0.75);
-}
-
-.calculator-grid>button:hover {
-    background-color: rgba(255, 255, 255, 0.9);
-}
-
-.span-two {
-    grid-column: span 2;
-}
-
-.output {
-    grid-column: 1 / -1;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    background-color: rgba(00, 00, 00, 0.75);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: space-between;
-    padding: 0.75rem 0.75rem 0.25rem 2.75rem;
-    word-wrap: break-word;
-    word-break: break-all;
-    position: relative;
-}
-
-.output .previous-operand {
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 1.5rem;
-    word-spacing: 10px;
-}
-
-.output .current-operand {
-    color: white;
-    font-size: 2.5rem;
-}
-
-.chat-window-open {
-    background-color: rgba(00, 00, 00, 0.75);
-    color: white;
-    width: 384px;
-    word-wrap: break-word;
-    font-size: 1.5rem;
-    font-weight: 300;
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 20px;
-    border-radius: 10px;
-    top: 0px;
-    transform: translate3d(0, 0, 0);
-    transition: 0.2s all ease-in-out;
-}
-
-.box {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    margin-top: 3rem;
-    padding: 0px 10%;
-    justify-content: space-around;
-    /* gap: 2rem; */
-}
-
-#bottom-left-corner {
-    border-bottom-left-radius: 10px;
-}
-
-#bottom-right-corner {
-    border-bottom-right-radius: 10px;
-}
-
-.gpt-symbol {
-    color: rgb(255, 255, 255, 0.7);
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    margin: 5px;
-    outline: none;
-}
-
-.gpt-symbol:hover,
-.info-symbol:hover,
-.prompt-symbol:hover {
-    color: white;
-    cursor: pointer;
-}
-
-.prompt-symbol {
-    color: rgb(255, 255, 255, 0.7);
-    outline: none;
-    position: relative;
-}
-
-.option-card {
-    display: flex;
-    border-radius: 10px;
-    background-color: rgba(00, 00, 00, 0.75);
-    position: absolute;
-    width: auto;
-    min-height: 72px;
-    max-height: 553px;
-    max-width: 320px;
-    flex-direction: column;
-    color: white;
-    font-size: 1.5rem;
-    font-weight: 300;
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 20px;
-    gap: 3rem;
-    word-wrap: break-word;
-}
-
-.option-card-open {
-    width: 320px;
-}
-
-.option-card-content {
-    position: relative;
-    display: flex;
-}
-
-.option-buttons {
-    display: flex;
-    gap: 1rem;
-    top: 40px;
-}
-
-.row-item {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-}
-
-.row-item:first-child>* {
-    margin-left: auto;
-}
-
-.row-item:last-child>* {
-    margin-right: auto;
-}
-
-.prompt-buttons {
-    display: flex;
-    font-size: auto;
-    gap: 2rem;
-    word-wrap: break-word;
-    flex-direction: column;
-    justify-content: space-evenly;
-}
-
-.prompt-buttons>* {
-    color: rgb(255, 255, 255, 0.7);
-    outline: none;
-    position: relative;
-}
-
-.prompt-buttons>*:hover {
-    color: white;
-    cursor: pointer;
-}
-
-.dropdown-section {
-    display: flex;
-    justify-content: flex-start;
-    gap: 2rem;
-    font-size: x-large;
-    width: 320px;
-    padding: 25px 20px 0px 20px;
-}
-
-.dropdown-button {
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.75);
-    color: white;
-}
-
-.dropdown-button:hover,
-.dropdown-button:active,
-.dropdown-button:focus {
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.65);
-    color: white;
-}
-
-.dropdown-menu {
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.75);
-}
-
-.dropdown-option:hover {
-    background-color: rgba(255, 255, 255, 0.9);
-}
-
-.dropdown-option:active {
-    background-color: rgba(255, 255, 255, 0.9);
-    color: #212529;
-}
-
-#dropdown-basic-button:active {
-    background-color: rgba(0, 0, 0, 0.65);
-}
-
-.info-section {
-    position: absolute;
-    bottom: 10px;
-    left: 30px;
-}
-
-.info-icon:hover {
-    color: rgb(255, 255, 255, 0.9);
-    cursor: pointer;
-}
-
-.info-icon {
-    color: rgb(255, 255, 255, 0.7);
-    outline: none;
-}
-
-.info-card {
-    color: black;
-    background-color: rgba(255, 255, 255, 0.75);
-    border-radius: 10px;
-    font-size: larger;
-    width: 400px;
-    padding: 30px;
-    font-weight: 600;
-    margin-top: 20px;
-    transform: translateY(50px);
-    opacity: 0;
-    transition: opacity 0.5s ease, transform 0.3s ease;
-    position: absolute;
-}
-
-.info-card.show {
-    position: relative;
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.5s ease, transform 0.3s ease;
-}
-
-.close-info {
-    position: absolute;
-    right: 10px;
-    color: rgba(0, 0, 0, 0.75);
-    top: 10px;
-}
-
-.close-info:hover {
-    color: rgba(0, 0, 0, 0.85);
-    cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.55);
-    border-radius: 100%;
-}
+    body {
+        /* overflow: hidden; */
+        margin: 0;
+        background: repeating-linear-gradient(to right, #31aae7, #ee58f3);
+        caret-color: transparent;
+        color: transparent;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    
+    .box {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        margin: 3rem auto 1rem;
+        padding: 0px 10%;
+        justify-content: space-around;
+        gap: 2rem;
+    }
+    
+    .calculator-grid {
+        position: relative;
+        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(4, 6rem);
+        grid-template-rows: minmax(7rem, auto) repeat(6, 6rem);
+    }
+    
+    .calculator-grid>button {
+        cursor: pointer;
+        font-size: 2rem;
+        border: 1px solid white;
+        outline: none;
+        background-color: rgba(255, 255, 255, 0.75);
+    }
+    
+    .calculator-grid>button:hover {
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .span-two {
+        grid-column: span 2;
+    }
+    
+    .span-one {}
+    
+    .chat-window-hidden {
+        visibility: 0;
+        position: relative;
+        /* width: 384px; */
+        padding: 20px;
+        width: 100%;
+        min-width: 350px;
+    }
+    
+    .chat-window-open {
+        background-color: rgba(00, 00, 00, 0.75);
+        color: white;
+        width: 100%;
+        min-width: 350px;
+        /* width: 384px; */
+        word-wrap: break-word;
+        font-size: 1.5rem;
+        font-weight: 300;
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 20px;
+        border-radius: 10px;
+        /* top: 0px; */
+        transform: translate3d(0, 0, 0);
+        transition: 0.3s all ease-in-out;
+    }
+    
+    #bottom-left-corner {
+        border-bottom-left-radius: 10px;
+    }
+    
+    #bottom-right-corner {
+        border-bottom-right-radius: 10px;
+    }
+    
+    .gpt-symbol {
+        color: rgb(255, 255, 255, 0.7);
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        margin: 5px;
+        outline: none;
+    }
+    
+    .gpt-symbol:hover,
+    .info-icon:hover {
+        color: white;
+        cursor: pointer;
+    }
+    
+    .dropdown {
+        min-width: 320px;
+        padding-right: 15%;
+    }
+    
+    .dropdown-title {
+        display: flex;
+        justify-content: flex-start;
+        gap: 2rem;
+        font-size: 1.5rem;
+        padding: 25px 20px 0px 20px;
+    }
+    
+    .dropdown-button,
+    .dropdown-toggle.show,
+    .dropdown-button:active {
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.75);
+        color: white;
+        width: 100%;
+        border: none;
+    }
+    
+    .dropdown-button:hover,
+    .dropdown-button:active,
+    .dropdown-button:focus {
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.65);
+        color: white;
+    }
+    
+    .dropdown-menu {
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.75);
+    }
+    
+    .dropdown-option:hover,
+    .dropdown-option:active {
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .info-section {
+        position: absolute;
+        bottom: 10px;
+        left: 30px;
+    }
+    
+    .info-icon {
+        color: rgb(255, 255, 255, 0.7);
+        outline: none;
+    }
+    
+    .info-card {
+        color: black;
+        background-color: rgba(255, 255, 255, 0.75);
+        border-radius: 10px;
+        font-size: larger;
+        width: 400px;
+        padding: 30px;
+        font-weight: 600;
+        margin-top: 20px;
+        transform: translateY(50px);
+        opacity: 0;
+        transition: opacity 0.5s ease, transform 0.3s ease;
+        position: absolute;
+    }
+    
+    .info-card.show {
+        position: relative;
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.5s ease, transform 0.3s ease;
+    }
+    
+    .close-info {
+        position: absolute;
+        right: 10px;
+        color: rgba(0, 0, 0, 0.75);
+        top: 10px;
+    }
+    
+    .close-info:hover {
+        color: rgba(0, 0, 0, 0.85);
+        cursor: pointer;
+        background-color: rgba(255, 255, 255, 0.55);
+        border-radius: 100%;
+    }
+    
+    .output {
+        grid-column: 1 / -1;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        background-color: rgba(00, 00, 00, 0.75);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding: 0.75rem 0.75rem 0.25rem 2.75rem;
+        word-wrap: break-word;
+        word-break: break-all;
+        position: relative;
+    }
+    
+    .output .previous-operand {
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 1.5rem;
+        word-spacing: 10px;
+    }
+    
+    .output .current-operand {
+        color: white;
+        font-size: 2.5rem;
+    }
+    
+    .row-item {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .row-item>* {
+        width: 100%;
+    }
+    
+    @media (max-width: 1200px) {}
