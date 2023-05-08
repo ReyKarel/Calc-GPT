@@ -1,0 +1,5 @@
+{
+  "css.format.enable": true,
+  "css.completion.triggerPropertyValueCompletion": true,
+  "css.validate": true
+}

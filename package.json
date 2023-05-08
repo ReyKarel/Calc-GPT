@@ -6,6 +6,7 @@
         "@emotion/react": "^11.10.6",
         "@emotion/styled": "^11.10.6",
         "@fontsource/roboto": "^4.5.8",
+        "@headlessui/react": "^1.7.14",
         "@mui/material": "^5.11.12",
         "@rebass/preset": "^4.0.5",
         "@reduxjs/toolkit": "^1.9.3",
