@@ -19,7 +19,7 @@ const ChatPrompt = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(abortRequest())
+        // dispatch(abortRequest());
         dispatch(setResponse(''));
         dispatch(clearError());
     }, [result]);

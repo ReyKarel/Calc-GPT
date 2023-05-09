@@ -6,7 +6,6 @@ import { Tooltip } from "react-tooltip";
 import { useEffect, useState } from "react";
 
 
-
 const Display = () => {
     const INTEGER_FORMATTER = new Intl.NumberFormat('en-us', {
         maximumFractionDigits: 0
@@ -70,7 +69,7 @@ const Display = () => {
         dispatch(setLoading(true));
         try {
             const response = await processChatGPTRequest(prompt, result, controller);
-            dispatch(setResponse(response));
+            dispatch(setResponse(response || ''));
         } catch (error) {
             dispatch(setError(error.message));
         } finally {

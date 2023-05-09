@@ -45,6 +45,7 @@ const gptSlice = createSlice({
         abortRequest: (state) => {
             if (state.loading) {
                 state.abortController.abort();
+                state.response = ''
             }
         }
     },

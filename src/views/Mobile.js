@@ -4,36 +4,44 @@ import DropdownPrompts from "../components/DropdownPrompts";
 import Info from "../components/Info";
 import CalcGrid from "../components/CalcGrid";
 import NavBar from "../components/NavBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SiOpenai } from 'react-icons/si';
 import { information } from "../components/Info";
+import { screens, setScreen } from "../store/slices/displaySlice";
+import { useDispatch, useSelector } from "react-redux";
+import { abortRequest } from "../store/slices/gptSlice";
 
 const Mobile = () => {
 
-    const tabs = {
-        'calculator': <div className="calculator-grid mobile">
-            <Display />
-            <CalcGrid />
-        </div>,
-        'prompts': <div className="mobile">
-            <DropdownPrompts />
-        </div>,
-        'info': 
-            <div className={"info-card"}>{information} </div>
-        
-    };
-
-    const [displayedSection, setDisplayedSection] = useState('calculator');
+    const dispatch = useDispatch();
 
     const handleTabSelect = (tab) => {
-        setDisplayedSection(tab);
+        if (isLoading) {
+            dispatch(abortRequest());
+            dispatch(setScreen(tab));
+            return;
+        }
+        dispatch(setScreen(tab));
     };
+    const { currentScreen, isLoading, isResponse } = useSelector((state) => {
+        return {
+            currentScreen: state.display.currentScreen,
+            isLoading: state.gpt.loading,
+            isResponse: (state.gpt.response !== '')
+        };
+    });
+    useEffect(() => {
+        if ((isLoading || isResponse) && currentScreen !== 'chat') {
+            dispatch(setScreen('chat'));
+        }
+
+    }, [isLoading, isResponse]);
+
 
     return (
         <div className="mobile-screen">
-            {console.log('mobile')}
-            <NavBar currentTab={displayedSection} onTabSelect={handleTabSelect} />
-            {tabs[displayedSection]}
+            <NavBar currentTab={currentScreen} onTabSelect={handleTabSelect} />
+            {screens[currentScreen]}
         </div>
     );
 };
