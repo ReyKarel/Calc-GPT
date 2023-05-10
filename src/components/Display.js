@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { SiOpenai } from 'react-icons/si';
-import { setAbortController, setError, setLoading, setResponse } from "../store/slices/gptSlice";
+import { setAbortController, setError, setLoading, setResponse, prompts } from "../store/slices/gptSlice";
 import { processChatGPTRequest } from "./api";
 import { Tooltip } from "react-tooltip";
 import { useEffect, useState } from "react";
@@ -39,7 +39,7 @@ const Display = () => {
             currentNumber: prettifyNum(state.buttons.currentNumber),
             result: prettifyNum(state.buttons.result),
             secondOperand: prettifyNum(state.buttons.secondOperand, true),
-            prompt: state.gpt.prompt,
+            prompt: prompts[state.gpt.prompt],
         };
     });
     const dispatch = useDispatch();

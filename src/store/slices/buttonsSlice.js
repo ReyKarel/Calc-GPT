@@ -67,7 +67,7 @@ const buttonsSlice = createSlice({
             }
         },
         deleteDigit(state) {
-            if (state.currentNumber.length > 1) {
+            if (state.currentNumber && state.currentNumber.length > 1) {
                 state.currentNumber = state.currentNumber.slice(0, -1);
 
             } else {

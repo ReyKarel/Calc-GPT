@@ -1,47 +1,47 @@
-import Dropdown from 'react-bootstrap/Dropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
-import { prompts, setPrompt } from '../store/slices/gptSlice';
-import { useDispatch } from 'react-redux';
+import { setPrompt } from '../store/slices/gptSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { promptOptions } from './prompts';
+import { setScreen } from '../store/slices/displaySlice';
 
 
 
 const PromptMenu = () => {
+    const { currentPrompt } = useSelector((state) => {
+        return { currentPrompt: state.gpt.prompt };
+    });
+
     const dispatch = useDispatch();
-    const [selectedPrompt, setSelectedPrompt] = useState("default");
+
     const handlePromptSelect = (choice) => {
-      setSelectedPrompt(choice);
-      dispatch(setPrompt(prompts[choice]));
+        dispatch(setPrompt(choice));
+        dispatch(setScreen('calculator'))
     };
     
+
     const promptButtons = promptOptions.map(({ key, icon, label }) => {
-      const classNames = key === selectedPrompt ? 'selected-prompt' : '';
-      return (
-        <div key={key} className={classNames} onClick={() => handlePromptSelect(key)}>
-          <div className='prompt-option'>
-            {icon}
-            {label}
-          </div>
-        </div>
-      );
+        const classNames = key === currentPrompt ? 'selected-prompt prompt-option' : 'prompt-option ';
+        return (
+            <div key={key} className={classNames} onClick={() => handlePromptSelect(key)}>
+                {icon}
+                {label}
+            </div>
+        );
     });
-  
-    const remainingPromptOptions = Object.values(promptButtons).filter((option) => option.key !== selectedPrompt);
-    const selectedPromptButton = promptButtons.find(({ key }) => key === selectedPrompt);
-  
+
+
     return (
-      <div className='prompt-menu'>
-        {/* <Dropdown >
+        <div className='prompt-menu'>
+            {/* <Dropdown >
           <Dropdown.Toggle variant='dark' id="dropdown-basic-button" className='dropdown-button'>
             {selectedPromptButton}
           </Dropdown.Toggle>
           <Dropdown.Menu className='dropdown-menu'> */}
             {promptButtons}
-          {/* </Dropdown.Menu>
+            {/* </Dropdown.Menu>
         </Dropdown> */}
-      </div>
+        </div>
     );
-}
-export default PromptMenu
+};
+export default PromptMenu;

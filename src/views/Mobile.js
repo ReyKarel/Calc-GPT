@@ -39,7 +39,7 @@ const Mobile = () => {
 
 
     return (
-        <div className="mobile-screen">
+        <div  className="mobile-screen">
             <NavBar currentTab={currentScreen} onTabSelect={handleTabSelect} />
             {screens[currentScreen]}
         </div>
