@@ -5,32 +5,32 @@ import { HiOutlineLightBulb } from 'react-icons/hi';
 export const promptOptions = [
   {
     key: 'default',
-    icon: <HiOutlineLightBulb size={'2rem'} />,
+    icon: <HiOutlineLightBulb className={'prompt-icon'}  />,
     label: <p>General facts</p>,
   },
   {
     key: 'pirate',
-    icon: <GiPirateHat size={'2rem'} />,
+    icon: <GiPirateHat className={'prompt-icon'}  />,
     label: <p>Answer like a pirate</p>,
   },
   {
     key: 'history',
-    icon: <GiEmptyHourglass size={'2rem'} />,
+    icon: <GiEmptyHourglass className={'prompt-icon'}  />,
     label: <p>History facts</p>,
   },
   {
     key: 'zen',
-    icon: <MdOutlineTempleBuddhist size={'2rem'} />,
+    icon: <MdOutlineTempleBuddhist className={'prompt-icon'}  />,
     label: <p>Zen poem</p>,
   },
   {
     key: 'quote',
-    icon: <BsChatSquareQuote size={'2rem'} />,
+    icon: <BsChatSquareQuote className={'prompt-icon'}  />,
     label: <p>Inspirational quote</p>,
   },
   {
     key: 'sciFi',
-    icon: <GiSpaceship size={'2rem'} />,
+    icon: <GiSpaceship className={'prompt-icon'}  />,
     label: <p>Science fiction</p>,
   },
 ];

@@ -10,6 +10,9 @@ import { information } from "../components/Info";
 import { screens, setScreen } from "../store/slices/displaySlice";
 import { useDispatch, useSelector } from "react-redux";
 import { abortRequest } from "../store/slices/gptSlice";
+import WelcomeModal from "../components/WelcomeModal";
+import PromptMenu from "../components/PromptMenu";
+import ScrollWrapper from "../components/ScrollWrapper";
 
 const Mobile = () => {
 
@@ -38,10 +41,19 @@ const Mobile = () => {
     }, [isLoading, isResponse]);
 
 
+
     return (
-        <div  className="mobile-screen">
+        <div className="mobile-screen">
             <NavBar currentTab={currentScreen} onTabSelect={handleTabSelect} />
-            {screens[currentScreen]}
+            {/* {screens[currentScreen]} */}
+            <div className="calculator-grid ">
+                <Display />
+                <CalcGrid />
+            </div>
+            <WelcomeModal />
+            <PromptMenu />
+            <ScrollWrapper className={"info-card"}>{information} </ScrollWrapper>
+            <ChatPrompt className="chat-window-open" />
         </div>
     );
 };

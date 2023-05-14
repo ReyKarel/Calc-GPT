@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { promptOptions } from './prompts';
 import { setScreen } from '../store/slices/displaySlice';
+import ScrollWrapper from './ScrollWrapper';
 
 
 
@@ -16,7 +17,7 @@ const PromptMenu = () => {
 
     const handlePromptSelect = (choice) => {
         dispatch(setPrompt(choice));
-        dispatch(setScreen('calculator'))
+        setTimeout(()=>dispatch(setScreen('calculator')),50)
     };
     
 
@@ -32,7 +33,7 @@ const PromptMenu = () => {
 
 
     return (
-        <div className='prompt-menu'>
+        <ScrollWrapper className='prompt-menu'>
             {/* <Dropdown >
           <Dropdown.Toggle variant='dark' id="dropdown-basic-button" className='dropdown-button'>
             {selectedPromptButton}
@@ -41,7 +42,7 @@ const PromptMenu = () => {
             {promptButtons}
             {/* </Dropdown.Menu>
         </Dropdown> */}
-        </div>
+        </ScrollWrapper>
     );
 };
 export default PromptMenu;

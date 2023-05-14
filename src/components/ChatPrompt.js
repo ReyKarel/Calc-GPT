@@ -5,6 +5,7 @@ import { setResponse, clearError, abortRequest } from "../store/slices/gptSlice"
 import { SkeletonTheme } from "react-loading-skeleton";
 import ParagraphSkeleton from "./ParagraphSkeleton";
 import 'react-loading-skeleton/dist/skeleton.css';
+import ScrollWrapper from "./ScrollWrapper";
 
 
 const ChatPrompt = () => {
@@ -24,16 +25,22 @@ const ChatPrompt = () => {
         dispatch(clearError());
     }, [result]);
 
+const handleMouseOver = () =>{
+    document.documentElement.style.setProperty('--scrollbar-color','rgba(93, 64, 114, 1)')
+}
+const handleMouseLeave = () =>{
+    document.documentElement.style.setProperty('--scrollbar-color','rgba(93, 64, 114, 0.6)')
+}
 
-
+    // onMouseOver={} onMouseLeave={}
     return (
-        <div >
+        <ScrollWrapper >
             <SkeletonTheme borderRadius={"0.75rem"} height={16} baseColor="#8f8f8f" highlightColor="#f7f7f7">
-                <div className={response || loading ? "chat-window-open" : 'chat-window-hidden'}>
+                <div className={response ? "chat-window-open scroll" : 'chat-window-open'}>
                     {loading ? <ParagraphSkeleton /> : response}
                 </div>
             </SkeletonTheme>
-        </div>
+        </ScrollWrapper>
     );
 };
 export default ChatPrompt;

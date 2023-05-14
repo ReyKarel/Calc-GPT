@@ -10,7 +10,8 @@ const App = () => {
 
     const [height, width] = useWindowSize();
     return (
-        <>
+        <> 
+        {height < 700 ? document.documentElement.style.setProperty('--calc-button',`${height/9}px`) :document.documentElement.style.setProperty('--calc-button','clamp(3rem, 4rem + 5vw, 6rem)') }
 <Mobile />
             {/* {width < 600 ? <><Mobile/></> 
             : <div>

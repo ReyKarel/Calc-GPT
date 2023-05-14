@@ -6,6 +6,7 @@ import Info from "../../components/Info";
 import { information } from "../../components/Info";
 import ChatPrompt from "../../components/ChatPrompt";
 import PromptMenu from "../../components/PromptMenu";
+import ScrollWrapper from "../../components/ScrollWrapper";
 export const screens = {
     'calculator': <div className="calculator-grid mobile">
         <Display />
@@ -15,7 +16,7 @@ export const screens = {
         <PromptMenu />
     ,
     'info':
-        <div className={"info-card"}>{information} </div>,
+        <ScrollWrapper className={"info-card"}>{information} </ScrollWrapper>,
     'chat': <ChatPrompt className="chat-window-open"/>
 };
 

@@ -12,7 +12,7 @@ export const prompts = {
 };
 
 const initialState = {
-    prompt: prompts.default,
+    prompt: 'default',
     response: '',
     loading: false,
     error: null,
