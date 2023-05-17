@@ -13,8 +13,14 @@ body {
 :root {
     --calc-button: clamp(3rem, 4rem + 5vw, 6rem);
     --calc-width: calc(var(--calc-button) * 4);
-    --calc-height: calc(var(--calc-button)* 6.616);
+    --calc-height: calc(var(--calc-button) * 6.616);
     --scrollbar-color: rgba(93, 64, 114, 0.6);
+    --card-width: calc(0.95 * var(--calc-width));
+    --current-number: clamp()
+}
+
+::backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .box {
@@ -28,10 +34,7 @@ body {
 }
 
 .calculator-grid {
-    position: absolute;
-    top: 58%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
     justify-content: center;
     display: grid;
     grid-template-columns: repeat(4, var(--calc-button));
@@ -40,7 +43,7 @@ body {
 
 .calculator-grid>button {
     cursor: pointer;
-    font-size: calc(var(--calc-button)/2.2);
+    font-size: calc(var(--calc-button) / 2.5);
     border: 1px solid white;
     outline: none;
     background-color: rgba(255, 255, 255, 0.75);
@@ -66,11 +69,11 @@ body {
 }
 
 .chat-window-open {
-    background-color: rgba(00, 00, 00, 0.75);
+    background-color: rgba(10, 11, 23, 0.98);
     color: white;
-    width: var(--calc-width);
+    width: var(--card-width);
     word-wrap: break-word;
-    font-size: 1.5rem;
+    font-size: calc(var(--calc-button) / 3.5);
     font-weight: 300;
     font-family: Arial, Helvetica, sans-serif;
     padding: 1rem;
@@ -78,7 +81,15 @@ body {
     transform: translate3d(0, 0, 0);
     transition: 0.3s all ease-in-out;
     justify-content: center;
-    max-height: var(--calc-height);
+    max-height: calc(var(--calc-height) * 0.8);
+    margin-top: calc(var(--calc-height) * -1);
+    box-shadow: 0px 0px 50px 20px rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+}
+
+.overlay {
+    margin-top: calc(var(--calc-height) * -1);
+    z-index: 1000;
 }
 
 .delete-icon {
@@ -88,7 +99,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 0.9rem
+    width: 0.9rem;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -101,7 +112,7 @@ body {
 
 ::-webkit-scrollbar-track {
     border-radius: 100vw;
-    margin-block: calc(var(--calc-button)/4);
+    margin-block: calc(var(--calc-button) / 4);
 }
 
 .scroll {
@@ -114,6 +125,11 @@ body {
 
 #bottom-right-corner {
     border-bottom-right-radius: 10px;
+}
+
+.overlay-card {
+    z-index: 1000;
+    font-size: calc(var(--calc-button) / 10);
 }
 
 .gpt-symbol {
@@ -164,49 +180,62 @@ body {
 
 .prompt-menu {
     border-radius: 10px;
-    width: var(--calc-width);
-    background-color: rgba(255, 255, 255, 0.7);
+    width: var(--card-width);
+    background-color: rgba(255, 255, 255, 0.9);
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.5rem;
     padding: 1%;
-    max-height: var(--calc-height);
+    font-size: calc(var(--calc-button) / 3.5);
+    max-height: calc(var(--calc-height) * 0.8);
     overflow-y: auto;
-    padding-block: calc(var(--calc-button)/4);
+    padding-block: calc(var(--calc-button) / 4);
+    margin-top: calc(var(--calc-height) * -1);
     z-index: 1000;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 50px 20px rgba(0, 0, 0, 0.6);
 }
 
 .selected-prompt {
+    color: black;
+    display: flex;
+    justify-content: flex-start;
+    gap: calc(var(--calc-button) / 2);
+    font-size: calc(var(--calc-button) / 4);
+    padding: calc(var(--calc-button) / 3.5) calc(var(--calc-button) / 3.5) 0px calc(var(--calc-button) / 3.5);
     background-color: rgba(149, 201, 249, 0.7);
     border-radius: 10px;
-    color: white;
     border-bottom: solid rgba(0, 0, 0, 0.65);
     border-right: solid rgba(0, 0, 0, 0.65);
     border-top: solid rgba(0, 0, 0, 0.65) 0.7px;
     border-left: solid rgba(0, 0, 0, 0.65) 0.7px;
 }
 
+.prompt-option:hover {
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: rgba(183, 220, 255, 0.4);
+    box-shadow: inset lightblue 0 0 2px 2px;
+    cursor: pointer;
+}
+
 .selected-prompt:hover {
     background-color: rgba(183, 220, 255, 0.935) !important;
+    cursor: pointer;
 }
 
 .prompt-option {
     color: black;
+    box-sizing: border-box;
     display: flex;
     justify-content: flex-start;
-    gap: calc(var(--calc-button)/2);
-    font-size: calc(var(--calc-button)/4);
-    padding: calc(var(--calc-button)/3.5) calc(var(--calc-button)/3.5) 0px calc(var(--calc-button)/3.5);
+    gap: calc(var(--calc-button) / 3);
+    font-size: calc(var(--calc-button) / 4);
+    padding: calc(var(--calc-button) / 4) calc(var(--calc-button) / 4) 0px calc(var(--calc-button) / 4);
 }
 
 .prompt-icon {
-    font-size: calc(var(--calc-button)/3);
-}
-
-.prompt-option:hover {
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
-    cursor: pointer;
+    font-size: calc(var(--calc-button) / 3);
 }
 
 .dropdown-menu {
@@ -232,15 +261,19 @@ body {
 
 .info-card {
     color: black;
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     font-size: calc(var(--calc-button) / 4);
-    width: var(--calc-width);
+    font-weight: 400;
+    width: var(--card-width);
     padding: calc(var(--calc-button) / 4) calc(var(--calc-button) / 2);
-    font-weight: 600;
     transition: opacity 0.5s ease, transform 0.3s ease;
-    max-height: var(--calc-height);
+    max-height: calc(var(--calc-height) * 0.8);
     overflow-y: auto;
+    margin-top: calc(var(--calc-height) * -1);
+    z-index: 1000;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 50px 20px rgba(0, 0, 0, 0.6);
 }
 
 .info-card.show {
@@ -284,7 +317,16 @@ body {
 
 .nav-button.selected {
     background-color: rgba(255, 255, 255, 0.65);
-    border: solid rgb(74, 50, 91, 0.75) 2px;
+}
+
+.nav-button.selected:hover {
+    background-color: rgba(255, 255, 255, 0.65);
+    box-shadow: inset 0 0 12px 1px rgba(118, 159, 247, 0.493);
+}
+
+.nav-button:hover {
+    background-color: rgba(255, 255, 255, 0.55);
+    box-shadow: inset 0 0 22px 1px rgba(255, 255, 255, 0.655);
 }
 
 .nav-icon {
@@ -309,13 +351,14 @@ body {
 
 .output .previous-operand {
     color: rgba(255, 255, 255, 0.75);
-    font-size: 1.5rem;
+    /* font-size: 1.5rem; */
     word-spacing: 10px;
+    font-size: calc(var(--calc-button) / 3.3);
 }
 
 .output .current-operand {
     color: white;
-    font-size: 2.5rem;
+    font-size: calc(var(--calc-button) / 2.4);
 }
 
 .row-item {
@@ -340,10 +383,27 @@ body {
     justify-content: center;
 }
 
+.welcome-modal-button {
+    border: none;
+    background-color: #238abd;
+    color: white;
+    border-radius: 10px;
+    font-size: calc(var(--calc-button) / 3);
+    padding: 0.4rem 1rem 0.4rem;
+    margin-top: 0.5rem;
+}
+
+.welcome-modal-button:hover {}
+
 .welcome-modal {
     border: none;
-    background-color: rgb(255, 255, 255, 0.8);
-    max-width: var(--calc-width);
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255, 0.85);
+    max-width: var(--card-width);
+    caret-color: transparent;
+    user-select: none;
+    font-size: calc(var(--calc-button) / 4);
+    top: -20%;
 }
 
 .mobile-screen {

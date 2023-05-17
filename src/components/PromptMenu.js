@@ -22,7 +22,7 @@ const PromptMenu = () => {
     
 
     const promptButtons = promptOptions.map(({ key, icon, label }) => {
-        const classNames = key === currentPrompt ? 'selected-prompt prompt-option' : 'prompt-option ';
+        const classNames = key === currentPrompt ? 'selected-prompt' : 'prompt-option ';
         return (
             <div key={key} className={classNames} onClick={() => handlePromptSelect(key)}>
                 {icon}

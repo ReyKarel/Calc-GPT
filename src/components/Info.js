@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { SiOpenai } from 'react-icons/si';
 import { IoIosClose } from 'react-icons/io';
 
-export const information = <p>Welcome to Calc-GPT! Use the calculator as normal, when you have a result - click the OpenAI icon (<SiOpenai size={'1rem'} />) that appears in the calculator display to ask Chat-GPT about that number. You can also click the options menu at the center tab to change the style of answer you get back from ChatGPT. Enjoy!</p>;
+export const information = <p>Welcome to Calc-GPT! Use the calculator as normal, when you have a result - click the OpenAI icon (<SiOpenai  />) that appears in the calculator display to ask Chat-GPT about that number. You can also click the options menu at the center tab to change the style of answer you get back from ChatGPT. Enjoy!</p>;
 const Info = () => {
     const [showInfo, setShowInfo] = useState(false);
     const handleInfoClick = () => {

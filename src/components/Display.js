@@ -1,9 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
-import { SiOpenai } from 'react-icons/si';
-import { setAbortController, setError, setLoading, setResponse, prompts } from "../store/slices/gptSlice";
-import { processChatGPTRequest } from "./api";
-import { Tooltip } from "react-tooltip";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useEffect, useRef, useState } from "react";
+import useFitText from "../hooks/useFitText";
 
 
 const Display = () => {
@@ -32,17 +29,16 @@ const Display = () => {
             return num;
         }
     }
-    const { result, currentNumber, secondOperand, firstOperand, operation, prompt } = useSelector((state) => {
+    const { result, currentNumber, secondOperand, firstOperand, operation } = useSelector((state) => {
         return {
             firstOperand: prettifyNum(state.buttons.firstOperand, true),
             operation: standardizeOperation(state.buttons.operation),
             currentNumber: prettifyNum(state.buttons.currentNumber),
             result: prettifyNum(state.buttons.result),
             secondOperand: prettifyNum(state.buttons.secondOperand, true),
-            prompt: prompts[state.gpt.prompt],
+
         };
     });
-    const dispatch = useDispatch();
 
 
     const [displayWidth, setDisplayWidth] = useState(0);
@@ -62,47 +58,41 @@ const Display = () => {
         }
         return Math.max(1, length * 0.75);
     };
-
-    const handleGPT = async () => {
-        const controller = new AbortController();
-        dispatch(setAbortController(controller));
-        dispatch(setLoading(true));
-        try {
-            const response = await processChatGPTRequest(prompt, result, controller);
-            dispatch(setResponse(response || ''));
-        } catch (error) {
-            dispatch(setError(error.message));
-        } finally {
-            dispatch(setLoading(false));
-        }
-    };
+   
     const bottomLine = result !== null ? [result] : [currentNumber];
 
     return (
-        <div id="display" className="output " style={{ fontFamily: "Lucida Console" }}>
-            <Tooltip offset={20} anchorSelect="#gpt-tooltip" place="top" delayShow={20} delayHide={60}>
-                Click here to ask ChatGPT about {result && result.length < 12 ? result : "your result"}
-            </Tooltip>
-            {result !== null &&
-                <SiOpenai id="gpt-tooltip" onClick={handleGPT} size={'1.5em'} className="gpt-symbol" />
-            }
-            {result !== null ? <div className="previous-operand"
+        <div  className="output " style={{ fontFamily: "Lucida Console" }}>
+
+            {result !== null ? <div id="previous-operand" className="previous-operand"
                 style={{ fontSize: `min(1.5rem,${displayWidth / getLineLength([firstOperand, operation, secondOperand])}px)` }} >
                 {firstOperand}
                 {operation}
                 {secondOperand}
                 =
             </div> :
-                <div className="previous-operand"
-                    style={{ fontSize: `min(1.5rem,${displayWidth / getLineLength([firstOperand, operation])}px)` }}>
+                <div id="previous-operand" className="previous-operand"
+                // style={{ fontSize: `min(1.5rem,${displayWidth / getLineLength([firstOperand, operation])}px)` }}
+                >
                     {firstOperand}
                     {operation}
                 </div>}
-            <div style={{ fontSize: `min(2.5rem,${displayWidth / getLineLength(bottomLine)}px)` }} className="current-operand">{result !== null ? result : currentNumber === null ? '0' : currentNumber}</div>
+            <div 
+                // style={{ fontSize: `min(2.5rem,${displayWidth / getLineLength(bottomLine)}px)` }} 
+                id="current-operand" className="current-operand">{result !== null ? result : currentNumber === null ? '0' : currentNumber}</div>
         </div>
     );
 
 
 };
 export default Display;
+{/* <div className="previous-operand"
+style={{ fontSize: `min(1.5rem,${displayWidth / getLineLength([firstOperand, operation])}px)` }}>
+{firstOperand}
+{operation}
+</div>}
+<div style={{ fontSize: `min(2.5rem,${displayWidth / getLineLength(bottomLine)}px)` }} className="current-operand">{result !== null ? result : currentNumber === null ? '0' : currentNumber}</div> */}
 
+
+
+// find better way to dynamically change font size in the calc screen

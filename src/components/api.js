@@ -2,14 +2,14 @@ import axios from "axios";
 
 
 const API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
-export async function processChatGPTRequest(prompt, result, controller) {
+export async function processChatGPTRequest(prompt, outputNumber, controller) {
     const systemMessage = {
         role: 'system',
         content: prompt,
     };
     const userMessage = {
         role: 'user',
-        content: result.toString(),
+        content: outputNumber.toString(),
     };
     const apiRequestBody = {
         'model': 'gpt-3.5-turbo',

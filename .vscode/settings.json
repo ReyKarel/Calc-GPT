@@ -1,5 +1,7 @@
 {
   "css.format.enable": true,
   "css.completion.triggerPropertyValueCompletion": true,
-  "css.validate": true
+  "css.validate": true,
+  "editor.guides.bracketPairs": false,
+  "editor.tabSize": 2
 }
