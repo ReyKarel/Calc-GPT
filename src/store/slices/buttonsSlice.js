@@ -87,7 +87,8 @@ const buttonsSlice = createSlice({
             if (state.firstOperand !== null) {
                 state.secondOperand = parseFloat(state.currentNumber) || "0";
                 state.result = Number((eval(`${state.firstOperand} ${state.operation} ${state.secondOperand}`)).toFixed(14));
-                // This is to avoid extreme float number percision issues
+                
+                // This is to avoid float number percision issues
 
             } else {
                 state.secondOperand = state.currentNumber || '0';

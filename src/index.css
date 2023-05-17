@@ -11,12 +11,13 @@ body {
 }
 
 :root {
-    --calc-button: clamp(3rem, 4rem + 5vw, 6rem);
+    --calc-button: clamp(2rem, 4rem + 5vw, 5rem);
     --calc-width: calc(var(--calc-button) * 4);
     --calc-height: calc(var(--calc-button) * 6.616);
     --scrollbar-color: rgba(93, 64, 114, 0.6);
     --card-width: calc(0.95 * var(--calc-width));
-    --current-number: clamp()
+    --current-number: calc(var(--calc-button) / 2.6);
+    --previous-number: calc(var(--calc-button) / 3.5);
 }
 
 ::backdrop {
@@ -343,7 +344,7 @@ body {
     flex-direction: column;
     align-items: flex-end;
     justify-content: space-between;
-    padding: 0.75rem 0.75rem 0.25rem 2.75rem;
+    padding: 0.75rem;
     word-wrap: break-word;
     word-break: break-all;
     position: relative;
@@ -352,13 +353,13 @@ body {
 .output .previous-operand {
     color: rgba(255, 255, 255, 0.75);
     /* font-size: 1.5rem; */
-    word-spacing: 10px;
-    font-size: calc(var(--calc-button) / 3.3);
+    /* word-spacing: 10px; */
+    font-size: var(--previous-number)
 }
 
 .output .current-operand {
     color: white;
-    font-size: calc(var(--calc-button) / 2.4);
+    font-size: var(--current-number);
 }
 
 .row-item {

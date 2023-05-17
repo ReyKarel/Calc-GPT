@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
-import { useEffect, useRef, useState } from "react";
-import useFitText from "../hooks/useFitText";
+import { useEffect, useState } from "react";
 
 
 const Display = () => {
@@ -43,7 +42,7 @@ const Display = () => {
 
     const [displayWidth, setDisplayWidth] = useState(0);
     useEffect(() => {
-        const displayEl = document.getElementById('display').clientWidth;
+        const displayEl = document.getElementById('display').clientWidth || null;
         if (displayEl) {
             setDisplayWidth(displayEl);
         }
@@ -53,46 +52,55 @@ const Display = () => {
         let length = 0;
         for (let el of elements) {
             if (el) {
-                length += el.length;
+                length += el.toString().length;
             }
         }
-        return Math.max(1, length * 0.75);
+        return Math.max(1, length * 0.7);
     };
-   
-    const bottomLine = result !== null ? [result] : [currentNumber];
+
+    const bottomLine = getLineLength([result || currentNumber]);
+    const topLine = getLineLength([firstOperand, operation, secondOperand]);
+
+
+    const root = document.documentElement;
+    const currentNumSize = getComputedStyle(root).getPropertyValue('--current-number');
+    const prevNumSize = getComputedStyle(root).getPropertyValue('--previous-number');
+
 
     return (
-        <div  className="output " style={{ fontFamily: "Lucida Console" }}>
+        <div id="display" className="output" style={{ fontFamily: "Lucida Console" }}>
 
-            {result !== null ? <div id="previous-operand" className="previous-operand"
-                style={{ fontSize: `min(1.5rem,${displayWidth / getLineLength([firstOperand, operation, secondOperand])}px)` }} >
+            <div className="previous-operand"
+                style={{ fontSize: `min(${prevNumSize},${displayWidth / topLine}px)` }}
+            >
                 {firstOperand}
                 {operation}
                 {secondOperand}
-                =
-            </div> :
-                <div id="previous-operand" className="previous-operand"
-                // style={{ fontSize: `min(1.5rem,${displayWidth / getLineLength([firstOperand, operation])}px)` }}
-                >
-                    {firstOperand}
-                    {operation}
-                </div>}
-            <div 
-                // style={{ fontSize: `min(2.5rem,${displayWidth / getLineLength(bottomLine)}px)` }} 
-                id="current-operand" className="current-operand">{result !== null ? result : currentNumber === null ? '0' : currentNumber}</div>
+                {result !== null && '='}
+            </div>
+            <div
+                style={{ fontSize: `min(${currentNumSize},${displayWidth / bottomLine}px)` }}
+                className="current-operand">{result || currentNumber || "0"}</div>
         </div>
     );
 
 
 };
 export default Display;
-{/* <div className="previous-operand"
-style={{ fontSize: `min(1.5rem,${displayWidth / getLineLength([firstOperand, operation])}px)` }}>
-{firstOperand}
-{operation}
-</div>}
-<div style={{ fontSize: `min(2.5rem,${displayWidth / getLineLength(bottomLine)}px)` }} className="current-operand">{result !== null ? result : currentNumber === null ? '0' : currentNumber}</div> */}
 
 
 
-// find better way to dynamically change font size in the calc screen
+// {result !== null ? <div className="previous-operand"
+//                 style={{ fontSize: `min(${prevNumSize},${displayWidth / topLine}px)` }}
+//             >
+//                 {firstOperand}
+//                 {operation}
+//                 {secondOperand}
+//                 =
+//             </div> :
+//                 <div className="previous-operand"
+//                     style={{ fontSize: `min(${prevNumSize},${displayWidth / topLine}px)` }}
+//                 >
+//                     {firstOperand}
+//                     {operation}
+//                 </div>}
