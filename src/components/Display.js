@@ -89,18 +89,3 @@ const Display = () => {
 export default Display;
 
 
-
-// {result !== null ? <div className="previous-operand"
-//                 style={{ fontSize: `min(${prevNumSize},${displayWidth / topLine}px)` }}
-//             >
-//                 {firstOperand}
-//                 {operation}
-//                 {secondOperand}
-//                 =
-//             </div> :
-//                 <div className="previous-operand"
-//                     style={{ fontSize: `min(${prevNumSize},${displayWidth / topLine}px)` }}
-//                 >
-//                     {firstOperand}
-//                     {operation}
-//                 </div>}

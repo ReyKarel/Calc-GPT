@@ -16,10 +16,11 @@ const PromptMenu = () => {
     const dispatch = useDispatch();
 
     const handlePromptSelect = (choice) => {
+        
         dispatch(setPrompt(choice));
-        setTimeout(()=>dispatch(setScreen('calculator')),50)
+        setTimeout(() => dispatch(setScreen('calculator')), 50);
     };
-    
+
 
     const promptButtons = promptOptions.map(({ key, icon, label }) => {
         const classNames = key === currentPrompt ? 'selected-prompt' : 'prompt-option ';
@@ -34,14 +35,7 @@ const PromptMenu = () => {
 
     return (
         <ScrollWrapper className='prompt-menu'>
-            {/* <Dropdown >
-          <Dropdown.Toggle variant='dark' id="dropdown-basic-button" className='dropdown-button'>
-            {selectedPromptButton}
-          </Dropdown.Toggle>
-          <Dropdown.Menu className='dropdown-menu'> */}
             {promptButtons}
-            {/* </Dropdown.Menu>
-        </Dropdown> */}
         </ScrollWrapper>
     );
 };

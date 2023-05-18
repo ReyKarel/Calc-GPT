@@ -2,6 +2,7 @@ import { GiPirateHat, GiEmptyHourglass, GiSpaceship } from 'react-icons/gi';
 import { MdOutlineTempleBuddhist } from 'react-icons/md';
 import { BsChatSquareQuote } from 'react-icons/bs';
 import { HiOutlineLightBulb } from 'react-icons/hi';
+
 export const promptOptions = [
   {
     key: 'default',

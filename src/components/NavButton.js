@@ -1,14 +1,12 @@
-const NavButton = ({  children, clickHandler, choice, selected }) => {
+const NavButton = ({  id, children, clickHandler, choice, selected }) => {
     const handleClick = (event) => {
         event.stopPropagation();
         clickHandler(choice);
     };
 
-    //possibly change the outside click hook to ignore list of #ids as targets
-
 
     return (
-        <button  className={`nav-button ${choice === selected && 'selected'}`} onClick={handleClick} >
+        <button id={id && id} className={`nav-button ${choice === selected && 'selected'}`} onClick={handleClick} >
             {children}
         </button>
     );

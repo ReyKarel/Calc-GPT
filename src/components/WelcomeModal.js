@@ -21,7 +21,7 @@ const welcomeInfo = <p><h3>Welcome to Calc-GPT!</h3><br/> Press the {<SiOpenai /
   return (
     <dialog id="welcome-modal" className="welcome-modal">
       <div>{welcomeInfo}</div>
-      <button className="welcome-modal-button" onClick={() => welcomeModal && welcomeModal.close()}>
+      <button  className="welcome-modal-button" onClick={() => welcomeModal && welcomeModal.close()}>
         Let's Go!
       </button>
     </dialog>
